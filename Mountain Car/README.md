@@ -26,13 +26,13 @@ This works by iteratively updating the car's actions based on the rewards receiv
 at each time step. Mathematically, this is done using the Bellman equation.
 
 $$
-V^*_{\pi^*}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) + E \left[ V^*_{\pi^*}(x^{(\rho)} \mid x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) \right]
+V^*_{\pi^*}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) + \mathbb{E} \left[ V^*_{\pi^*}(x^{(\rho)} \mid x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) \right]
 $$
 
 Equation then allows us to extract the optimal policy $\pi^*$ at each state by:
 
 $$
-\pi^*(x^{(\rho-1)}) = \arg\min_u \left\{ \alpha^{(\rho-1)} + E \left[ V^*_{\pi^*}(x^{(\rho)} \mid x^{(\rho-1)}, u^{(\rho-1)}) \right] \right\}
+\pi^*(x^{(\rho-1)}) = \arg \min_u \left\{ \alpha^{(\rho-1)} + \mathbb{E} \left[ V^*_{\pi^*}(x^{(\rho)} \mid x^{(\rho-1)}, u^{(\rho-1)}) \right] \right\}
 $$
 
 After the optimal policy is determined, we can then simulate the car moving through the state space
