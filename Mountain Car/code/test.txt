@@ -1,0 +1,151 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+Delta_t = 0.01
+f = 0.2
+g = 9.8
+m = 0.02
+kf = 0.5 * m
+
+# State update function
+def update_state(x, dx, u):
+    dx_next = dx + Delta_t * (-3 * g * np.cos(3 * x) / m + u * f / m - kf / m * dx)
+    x_next = x + Delta_t * dx
+    # Enforce boundary conditions
+    if x_next > 0.5:
+        x_next = 0.5
+        dx_next = 0
+    elif x_next < -1.5:
+        x_next = -1.5
+        dx_next = 0
+    return x_next, dx_next
+
+# Convert from real space to grid world
+def real_to_grid(x, dx, x_bins, dx_bins):
+    x_idx = np.digitize(x, np.linspace(-1.5, 0.5, x_bins + 1)) - 1
+    dx_idx = np.digitize(dx, np.linspace(-5, 5, dx_bins + 1)) - 1
+    return x_idx, dx_idx
+
+# Convert from grid world to real space
+def grid_to_real(x_idx, dx_idx, x_bins, dx_bins):
+    x = -1.5 + (x_idx * (2.0 / x_bins))
+    dx = -5 + (dx_idx * (10.0 / dx_bins))
+    return x, dx
+
+# Policy simulation function
+def simulate_policy(initial_x, initial_dx, policy):
+    x = initial_x
+    dx = initial_dx
+    states_x = [x]
+    states_dx = [dx]
+    actions = []
+    
+    for step in policy:
+        u = step
+        x, dx = update_state(x, dx, u)
+        states_x.append(x)
+        states_dx.append(dx)
+        actions.append(u)
+    return states_x, states_dx, actions
+
+# Simulation
+initial_x = -0.5
+initial_dx = 0
+forward_policy = [1] * 35 + [-1] * 40 + [1] * 40 + [-1] * 40 + [1] * 55
+states_x, states_dx, actions = simulate_policy(initial_x, initial_dx, forward_policy)
+
+# Plotting the results
+plt.figure(figsize=(14, 5))
+plt.subplot(1, 3, 1)
+plt.plot(states_x, 'orange')
+plt.title('Position (x) Over Time')
+plt.xlabel('Time step')
+plt.ylabel('Position (x)')
+
+plt.subplot(1, 3, 2)
+plt.plot(actions, 'blue')
+plt.title('Actions (u) Over Time')
+plt.xlabel('Time step')
+plt.ylabel('Action (u)')
+
+plt.subplot(1, 3, 3)
+plt.plot(states_dx, 'green')
+plt.title('Velocity (dx) Over Time')
+plt.xlabel('Time step')
+plt.ylabel('Velocity (dx)')
+
+plt.tight_layout()
+plt.show()
+
+
+
+# Initialize the grid world and value function
+x_bins = 150
+dx_bins = 100
+V = np.zeros((x_bins, dx_bins, 2))  # Value function for each state and action
+
+# Time horizon
+T = 150
+
+# Reward function
+def reward(x):
+    return x
+
+# Bellman update
+def bellman_update(V, x_idx, dx_idx, u):
+    # Get the real world state
+    x, dx = grid_to_real(x_idx, dx_idx, x_bins, dx_bins)
+    # Update the state based on action
+    x_next, dx_next = update_state(x, dx, u)
+    # Get the next state's grid indices
+    x_next_idx, dx_next_idx = real_to_grid(x_next, dx_next, x_bins, dx_bins)
+    # Get the reward for the next state
+    r = reward(x_next)
+    # Update the value for the current state based on the Bellman equation
+    V_next = r + V[x_next_idx, dx_next_idx, 0]
+    return V_next
+
+# Optimal control policy
+U_star = np.zeros((x_bins, dx_bins, T))
+V[:, :, -1] = np.mgrid[-1.5:0.5:x_bins*1j, -5:5:dx_bins*1j][0]  # Initialize value function at time T
+
+# Value iteration over the grid world
+for t in range(T - 2, -1, -1):
+    for x_idx in range(x_bins):
+        for dx_idx in range(dx_bins):
+            # Calculate the value for both possible actions and choose the best one
+            forward_val = bellman_update(V, x_idx, dx_idx, 1)
+            backward_val = bellman_update(V, x_idx, dx_idx, -1)
+            if forward_val > backward_val:
+                V[x_idx, dx_idx, t] = forward_val
+                U_star[x_idx, dx_idx, t] = 1
+            else:
+                V[x_idx, dx_idx, t] = backward_val
+                U_star[x_idx, dx_idx, t] = -1
+
+# Run the optimal policy from the initial condition
+optimal_states_x, optimal_states_dx, optimal_actions = simulate_policy(initial_x, initial_dx, U_star[:, :, 0].flatten())
+
+# Plot the optimal policy results
+plt.figure(figsize=(14, 5))
+plt.subplot(1, 3, 1)
+plt.plot(optimal_states_x, 'orange')
+plt.title('Optimal Position (x) Over Time')
+plt.xlabel('Time step')
+plt.ylabel('Position (x)')
+
+plt.subplot(1, 3, 2)
+plt.plot(optimal_actions, 'blue')
+plt.title('Optimal Actions (u) Over Time')
+plt.xlabel('Time step')
+plt.ylabel('Action (u)')
+
+plt.subplot(1, 3, 3)
+plt.plot(optimal_states_dx, 'green')
+plt.title('Optimal Velocity (dx) Over Time')
+plt.xlabel('Time step')
+plt.ylabel('Velocity (dx)')
+
+plt.tight_layout()
+plt.show()
