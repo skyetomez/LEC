@@ -55,10 +55,10 @@ This involves creating a Q-table, a matrix where rows correspond to discrete pos
 The Q-table initialization is conducted using the following dimensions:
 
 $$
-\text{Number of position bins (n\_bins\_x)} = 150, \quad \text{Number of velocity bins (n\_bins\_dx)} = 100
+n_bins_x = 150, \quad n_bins_dx = 100
 $$
 
-Where \( n\_bins\_x \) and \( n\_bins\_dx \) are the number of bins for the position and velocity states.
+Where $n_bins_x$ and $n_bins_dx$ are the number of bins for the position and velocity states.
 
 ### Iteratively Populating Q-Table: Bellman Equation
 
@@ -75,7 +75,7 @@ $$
 x^{(n+1)} = x^{(n)} + \Delta t \dot{x}^{(n)}
 $$
 
-Additionally, the car can only move left or right with unit force $ u\in\{-1,1\} $.
+Additionally, the car can only move left or right with unit force $u\in\{-1,1\}$.
 
 ### Deriving the Optimal Policy
 
