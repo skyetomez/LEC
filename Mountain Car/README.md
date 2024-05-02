@@ -1,9 +1,3 @@
----
-title: "Mountain Car Problem"
-author: "Skyler Thomas"
-date: "Today"
----
-
 # Table of Contents
 
 1. [Introduction](#introduction)
@@ -18,7 +12,7 @@ In this homework assignment, we were tasked with the [Mountain Car Problem](http
 a classic test in the field of reinforcement learning. 
 
 The problem is that a car must climb over a hill starting from a valley. 
-In this task, we need to find the optimal control policy \( \pi^* \) given our initial conditions,
+In this task, we need to find the optimal control policy $\pi^*$ given our initial conditions,
 to get our car over a hill. 
 
 We were told in class that a solution is for the car to initially move backwards
@@ -81,7 +75,7 @@ $$
 x^{(n+1)} = x^{(n)} + \Delta t \dot{x}^{(n)}
 $$
 
-Additionally, the car can only move left or right with unit force \( u\in\{-1,1\} \).
+Additionally, the car can only move left or right with unit force $ u\in\{-1,1\} $.
 
 ### Deriving the Optimal Policy
 
