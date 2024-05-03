@@ -21,13 +21,13 @@ at each time step. Mathematically, this is done using the Bellman equation.
 
 
 $$
-V^*_{\pi^*}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) + \mathbb{E} \left[ V^*_{\pi^*}(x^{(\rho)} \mid x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) \right]
+V^*_{\pi^*}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) + E [ V^*_{\pi^*}(x^{(\rho)} \mid x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) ]
 $$
 
 Equation then allows us to extract the optimal policy $\pi^*$ at each state by:
 
 $$
-\pi^*(x^{(\rho-1)}) = \arg \min_u \left\{ \alpha^{(\rho-1)} + \mathbb{E} \left[V^*_{\pi^*}(x^{(\rho)} \mi x^{(\rho-1)}, u^{(\rho-1)}) \right] \right\}
+\pi^*(x^{(\rho-1)}) = \arg \min_u \left\{ \alpha^{(\rho-1)} + E [V^*_{\pi^*}(x^{(\rho)} \mi x^{(\rho-1)}, u^{(\rho-1)}) \right] \}
 $$
 
 After the optimal policy is determined, we can then simulate the car moving through the state space and analyze its strategy to reach the hilltop. 
