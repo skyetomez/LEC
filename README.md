@@ -7,7 +7,7 @@ This repository contains some selected assignments from a course in Learning, Es
 ### Built With
 
 
-* [![MATLAB][https://user-images.githubusercontent.com/10817626/67014544-482be200-f0f5-11e9-8e74-3dd575c8ad83.png]][Matlab-url]
+* [![MATLAB][assets/matlab.png]][Matlab-url]
 
 
 ## Getting Started
