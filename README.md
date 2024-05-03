@@ -7,8 +7,7 @@ This repository contains some selected assignments from a course in Learning, Es
 ### Built With
 
 
-* [![MATLAB][assets/matlab.png]][Matlab-url]
-
+* [![MATLAB][MATLAB]][Matlab-url]
 
 ## Getting Started
 
@@ -57,3 +56,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 [Matlab-url]: https://www.mathworks.com/products/matlab.html
+[MATLAB]: assets/matlab.png
