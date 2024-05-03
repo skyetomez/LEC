@@ -6,7 +6,7 @@ In this homework assignment, we were tasked with the [Mountain Car Problem](http
 a classic test in the field of reinforcement learning. 
 
 The problem is that a car must climb over a hill starting from a valley. 
-In this task, we need to find the optimal control policy $\pi^*$ given our initial conditions,
+In this task, we need to find the optimal control policy $\pi^\star$ given our initial conditions,
 to get our car over a hill. 
 
 We were told in class that a solution is for the car to initially move backwards
@@ -21,13 +21,13 @@ at each time step. Mathematically, this is done using the Bellman equation.
 
 
 $$
-V^{*}_{\pi^{*}}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) + E [ V^{*}_{\pi^{*}}(x^{(\rho)} \mid x^{(\rho-1)}, \pi^{*}(x^{(\rho-1)})) ]
+V^*_{\pi^\star}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^\star(x^{(\rho-1)})) + E \left[ V^\star_{\pi^\star}(x^{(\rho)} \mid x^{(\rho-1)}, \pi^\star(x^{(\rho-1)})) \right]
 $$
 
-Equation then allows us to extract the optimal policy $\pi^*$ at each state by:
+Equation then allows us to extract the optimal policy $\pi^\star$ at each state by:
 
 $$
-\pi^*(x^{(\rho-1)}) = \arg \min_u \left\{ \alpha^{(\rho-1)} + E [V^*_{\pi^*}(x^{(\rho)} \mi x^{(\rho-1)}, u^{(\rho-1)}) \right] \}
+\pi^\star(x^{(\rho-1)}) = \arg \min_u \left\{ \alpha^{(\rho-1)} + E \left[V^\star_{\pi^\star}(x^{(\rho)} \mi x^{(\rho-1)}, u^{(\rho-1)}) \right] \right\}
 $$
 
 After the optimal policy is determined, we can then simulate the car moving through the state space and analyze its strategy to reach the hilltop. 
