@@ -7,7 +7,7 @@ This repository contains some selected assignments from a course in Learning, Es
 ### Built With
 
 
-* [![MATLAB][MATLAB]][Matlab-url]
+* [![MATLAB][https://images.app.goo.gl/sjgftMTFEUxKGwV57]][Matlab-url]
 
 
 ## Getting Started
@@ -37,13 +37,15 @@ The directory structure is as follows:
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+You can just clone the repo using 
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+```
+cd ~
+git clone https://github.com/skyetomez/LEC.git
+```
+or `cd` to your favorite directory and run matlab from the main script.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 
 <!-- LICENSE -->
@@ -52,18 +54,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 [Matlab-url]: https://www.mathworks.com/products/matlab.html
