@@ -20,6 +20,7 @@ To get a local copy up and running follow these simple example steps.
 
 The directory structure is as follows:
 
+```
 ├── Eye Motion Simulation
 │   ├── code
 │   └── writeup
@@ -32,7 +33,7 @@ The directory structure is as follows:
     ├── code
     └── writeup
         └── assets
-
+```
 
 ## Usage
 
