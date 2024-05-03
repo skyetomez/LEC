@@ -77,7 +77,7 @@ After the Q-table is fully populated, the optimal policy is extracted, which gui
 
 ## Implementation
 
-Due to the size of the state space, we simulate this approach in \texttt{MATLAB}. 
+Due to the size of the state space, we simulate this approach in `MATLAB`. 
 
 ### Q-table
 
