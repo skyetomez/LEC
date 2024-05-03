@@ -27,7 +27,7 @@ $$
 Equation then allows us to extract the optimal policy $\pi^\star$ at each state by:
 
 $$
-\pi^\star(x^{(\rho-1)}) = \arg \min_u \left\{ \alpha^{(\rho-1)} + E \left[V^\star_{\pi^\star}(x^{(\rho)} \mi x^{(\rho-1)}, u^{(\rho-1)}) \right] \right\}
+\pi^\star(x^{(\rho-1)}) = \arg \min_u \{ \alpha^{(\rho-1)} + E \left[V^\star_{\pi^\star}(x^{(\rho)} \mi x^{(\rho-1)}, u^{(\rho-1)}) \right] \}
 $$
 
 After the optimal policy is determined, we can then simulate the car moving through the state space and analyze its strategy to reach the hilltop. 
