@@ -9,12 +9,15 @@ We were given the task to simulate the motion of a system resembling a human eye
 The system is modeled using the given state vector $\mathbf{s}$ composed of position, velocity, and force. We frame this problem as an optimization problem.
 
 Minimize:
+
 $$
-J = \text{var}\left[ S^T x^{(p)} \right]
+J = Var\left[ S^T x^{(p)} \right]
 $$
+
 subject to: 
+
 $$
-s^T E\left[ x^{(p+i-1)} \right] = g, \quad \text{for} \quad i = 1, \dots, k
+s^T E\left[ x^{(p+i-1)} \right] = g, \quad for \quad i = 1, \dots, k
 $$
 
 To solve this optimization function, we need to construct its Lagrangian function and solve for when the gradients are parallel i.e., they differ by a scalar multiple $\lambda_i$ in each constraint.

@@ -21,7 +21,7 @@ at each time step. Mathematically, this is done using the Bellman equation.
 
 
 $$
-V^*_{\pi^*}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) + \mathbb{E} \left[V_{\pi^*}^*(x^{(\rho)} \min x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) \right]
+V^*_{\pi^*}(x^{(\rho-1)}) = \alpha^{(\rho-1)}(x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) + \mathbb{E} \left[V_{\pi^*}^*(x^{(\rho)} min x^{(\rho-1)}, \pi^*(x^{(\rho-1)})) \right]
 $$
 
 Equation then allows us to extract the optimal policy $\pi^*$ at each state by:
