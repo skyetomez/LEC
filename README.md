@@ -47,13 +47,6 @@ or `cd` to your favorite directory and run matlab from the main script.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 [Matlab-url]: https://www.mathworks.com/products/matlab.html
 [MATLAB]: assets/matlab.png

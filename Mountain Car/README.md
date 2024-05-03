@@ -1,10 +1,4 @@
-# Table of Contents
-
-1. [Introduction](#introduction)
-2. [Approach](#approach)
-3. [Implementation](#implementation)
-4. [Results](#results)
-5. [Code](#code)
+# Mountain Car Problem 
 
 ## Introduction
 
