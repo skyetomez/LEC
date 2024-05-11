@@ -1,6 +1,5 @@
 # Optimal Feedback Control of Gaze
 
-[[_TOC_]]
 
 ## Introduction
 The simulation aims to demonstrate that natural gaze behavior adheres to an optimal control strategy, with a focus on centering the target on the fovea while keeping the eyes aligned with the head. This involves examining how variations in signal-dependent noise impact control strategies.
@@ -37,14 +36,16 @@ $$
 Optimal feedback control strategies are computed using:
 
 - **Kalman Gain Equation**:
-  $$
-  K(t) = S_e(t|t-1)H^T [H S_e(t|t-1) H^T + Q_y]^{-1}
-  $$
+
+$$
+K(t) = S_e(t|t-1)H^T [H S_e(t|t-1) H^T + Q_y]^{-1}
+$$
 
 - **Feedback Gain Calculation**:
-  $$
-  G(t) = [L + B^T W_x B + B^T W_{xe} C_i B]^{-1} B^T W_x A
-  $$
+
+$$
+G(t) = [L + B^T W_x B + B^T W_{xe} C_i B]^{-1} B^T W_x A
+$$
 
 ## Method
 The MATLAB functions implemented include:
