@@ -1,44 +1,71 @@
-### Introduction
+# Optimal Feedback Control of Gaze
 
-We were given the task to simulate the motion of a system resembling a human eye. The primary goal of this assignment was to determine motor commands that minimize endpoint variance during eye movement towards a target position in the presence of signal-dependent noise. Additionally, the minimization was constrained by having the expected position at the next time points $k$ be equal to our goal position.
+[[_TOC_]]
 
-### Approach
+## Introduction
+The simulation aims to demonstrate that natural gaze behavior adheres to an optimal control strategy, with a focus on centering the target on the fovea while keeping the eyes aligned with the head. This involves examining how variations in signal-dependent noise impact control strategies.
 
-The system is modeled using the given state vector $\mathbf{s}$ composed of position, velocity, and force. We frame this problem as an optimization problem.
+## Approach
 
-Minimize:
-
-$$
-J = \text{Var}\left[ S^T x^{(p)} \right]
-$$
-
-Subject to: 
+### System Dynamics
+The dynamics of the eye are modeled using a third-order linear system, capturing position, velocity, and torque, expressed by the state vector $\mathbf{x}$ and control input $u_e$. The dynamics equation is:
 
 $$
-s^T E\left[ x^{(p+i-1)} \right] = g, \quad \text{for} \quad i = 1, \dots, k
+\begin{bmatrix}
+\dot{x}_1 \\
+\dot{x}_2 \\
+\dot{x}_3
+\end{bmatrix} = 
+\begin{bmatrix}
+0 & 1 & 0 \\
+-\frac{k_e}{m_e} & -\frac{b_e}{m_e} & \frac{1}{m_e} \\
+0 & 0 & -\alpha_2
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix} +
+\begin{bmatrix}
+0 \\
+0 \\
+\frac{1}{\alpha_1}
+\end{bmatrix} u_e
 $$
 
-To solve this optimization function, we need to construct its Lagrangian function and solve for when the gradients are parallel i.e., they differ by a scalar multiple $\lambda_i$ in each constraint.
+### Optimal Control
+Optimal feedback control strategies are computed using:
 
-The Lagrangian function is given by:
+- **Kalman Gain Equation**:
+  $$
+  K(t) = S_e(t|t-1)H^T [H S_e(t|t-1) H^T + Q_y]^{-1}
+  $$
 
-$$
-\mathcal{L}(u,\lambda_i) = \text{var}\left[ S^T x^{(p)} \right] + \lambda_i \sum_{i=1}^{k} \left( s^T E\left[ x^{(p+i-1)} \right] - g \right)
-$$
+- **Feedback Gain Calculation**:
+  $$
+  G(t) = [L + B^T W_x B + B^T W_{xe} C_i B]^{-1} B^T W_x A
+  $$
 
-In the derivation that follows, the $\frac{d\mathcal{L}}{du}$ and $\frac{d\mathcal{L}}{d\lambda}$ are computed to solve for the optimal motor commands $u$ and the Lagrangian multipliers $\lambda_i$. Additionally, the $\frac{dJ}{du}$ or $\frac{dJ}{d\lambda}$ term refer to their corresponding component in the Lagrangian.
+## Method
+The MATLAB functions implemented include:
+- `calculateAandB.m`: Calculates system matrices A and B.
+- `simulateCase.m`: Simulates scenarios under various noise conditions.
+- `calculateKalmanGains.m`: Computes Kalman gains for state estimation.
+- `calculateFeedbackGains.m`: Calculates feedback gains for control inputs.
+- `simulateSystem.m`: Applies calculated gains to simulate system dynamics.
 
-### Implementation
+## Results
+Simulated scenarios with associated discussions:
 
-To solve the problem, we first used the given cost function and constraints to set up a Lagrangian function. This Lagrangian function was then minimized by first computing the gradient of the function with respect to the system input $u$ and then to each of the Lagrangian multipliers $\lambda_i$.
+1. **No Signal Dependent Noise, No Hold**: Baseline scenario. The plot shows stable gaze control with minimal deviation from the target.
+2. **Small Signal Dependent Noise, No Hold**: Introduces minor variability. The plot indicates slightly increased fluctuations in gaze trajectory but maintains target alignment.
+3. **Large Signal Dependent Noise, No Hold**: Tests system robustness. The plot reveals more significant deviations from the target path, highlighting the effects of increased noise on control accuracy.
+4. **Small Signal Dependent Noise, Head Hold 50 ms**: Examines control during brief head immobilization. The plot displays initial stability, followed by minor deviations due to the imposed hold, illustrating the system's response to sudden restraint.
+5. **Small Signal Dependent Noise, Head Hold 100 ms**: Longer restraint period. The plot shows initial gaze stability, with noticeable deviations increasing over the hold period, underscoring the challenges in control strategy during extended immobilization.
 
-Upon computing this, we are left with $p+k$ equations and $p+k$ unknowns where $p$ is the number of time steps and $k$ is the number of constraints.
+## Discussion
+The project confirms the efficacy of the optimal feedback control model in simulating natural gaze behaviors under varied conditions. The results demonstrate the system's adaptability to external noise and temporary restraints, providing valuable insights into human gaze stabilization mechanisms.
 
-**No Signal Dependent Noise**
-
-The first plot above shows the system for the optimal $u$ without signal dependent noise in the system. The second plot shows a continuous increase in the position over time. This suggests that once the target is reached there is no movement, but the amount of input provided to the system, based on the first plot, changes a lot before the system converges to the target position. The third subplot shows how the speed of the eye movement peaks and then decreases.
-
-**Signal Dependent Noise**
-
-The above plot shows a comparison of a control system's behavior with and without signal-dependent noise in the system by setting $\kappa=0.0006$. The top plot shows the optimal motor commands calculated to minimize endpoint variance when controlling the system.
+## Code Overview
+The MATLAB codebase encompasses detailed function implementations for system modeling, gain calculations, and scenario simulations, ensuring the theoretical concepts are practically applied to achieve the project's objectives.
 
