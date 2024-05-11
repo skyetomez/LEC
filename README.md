@@ -20,18 +20,17 @@ To get a local copy up and running follow these simple example steps.
 The directory structure is as follows:
 
 ```
+.
+├── assets
+├── Eye Head Motion Simulation
+│   └── code
 ├── Eye Motion Simulation
-│   ├── code
-│   └── writeup
-│       └── assets
+│   └── code
 ├── Mountain Car
-│   ├── code
-│   └── writeup
-│       └── assets
+│   └── code
 └── Saccade Simulation
-    ├── code
-    └── writeup
-        └── assets
+    └── code
+
 ```
 
 ## Usage
