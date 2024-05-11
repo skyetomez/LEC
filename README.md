@@ -9,11 +9,6 @@ This repository contains some selected assignments from a course in Learning, Es
 
 * [![MATLAB][MATLAB]][Matlab-url]
 
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 
 ## Directory Structure
 
